@@ -1,0 +1,53 @@
+let sentence = "my name is chaitanya.i am working at tavisca.i am learning typescript."
+
+function Capitalize(sentence: string){
+    let result: string = sentence.charAt(0).toUpperCase();
+    for(let index = 1; index < sentence.length; index++){
+        if(sentence.charAt(index - 1) == '.')
+        {
+            result += sentence.charAt(index).toUpperCase();
+        }
+        else
+        {
+            result += sentence.charAt(index);
+        }
+    }
+
+    return result;
+}
+
+function GetAllWords(multiSentence: string){
+    let sentences = multiSentence.split('.')
+    sentences = sentences.filter(sentence => sentence.length > 0);
+
+    let words = Array<string>();
+
+    for(let sentence of sentences){
+        words = words.concat(sentence.split(' '))
+    }
+
+    return words;
+}
+function NumberOfWords(multiSentence: string){
+    
+    let words = GetAllWords(multiSentence);
+
+    return words.length;
+}
+
+function WordsWithLetter(sentence: string, letter: string){
+    let words = GetAllWords(sentence);
+
+    return words.filter(word => word.includes(letter));
+}
+
+function WordsMatchingCount(sentence: string, keyword: string){
+    let words = GetAllWords(sentence);
+
+    return words.filter(word => word === keyword).length
+}
+
+console.log("Capitalized sentence:", Capitalize(sentence));
+console.log("Number of words:", NumberOfWords(sentence));
+console.log("Words with letter 'a':", WordsWithLetter(sentence, 'a'));
+console.log("Number of words matching 'am':", WordsMatchingCount(sentence, "am"));
